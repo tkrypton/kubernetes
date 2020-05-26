@@ -26,6 +26,7 @@ readonly KUBE_SUPPORTED_SERVER_PLATFORMS=(
   linux/arm
   linux/arm64
   linux/s390x
+  linux/sparc64
   linux/ppc64le
 )
 
@@ -35,6 +36,7 @@ readonly KUBE_SUPPORTED_NODE_PLATFORMS=(
   linux/arm
   linux/arm64
   linux/s390x
+  linux/sparc64
   linux/ppc64le
   windows/amd64
 )
@@ -47,6 +49,7 @@ readonly KUBE_SUPPORTED_CLIENT_PLATFORMS=(
   linux/arm
   linux/arm64
   linux/s390x
+  linux/sparc64
   linux/ppc64le
   darwin/amd64
   darwin/386
@@ -61,6 +64,7 @@ readonly KUBE_SUPPORTED_TEST_PLATFORMS=(
   linux/arm
   linux/arm64
   linux/s390x
+  linux/sparc64
   linux/ppc64le
   darwin/amd64
   windows/amd64
@@ -413,6 +417,10 @@ kube::golang::set_platform_envs() {
       "linux/s390x")
         export CGO_ENABLED=1
         export CC=s390x-linux-gnu-gcc
+        ;;
+      "linux/sparc64")
+        export CGO_ENABLED=1
+        export CC=sparc64-linux-gnu-gcc
         ;;
     esac
   fi
