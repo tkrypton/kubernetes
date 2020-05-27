@@ -22,6 +22,8 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"fmt"
+	"os"
 )
 
 type empty struct{}
@@ -57,5 +59,10 @@ func hasSubdir(root, dir string) (rel string, ok bool) {
 
 // BoilerplatePath uses the boilerplate in code-generator by calculating the relative path to it.
 func BoilerplatePath() string {
-	return path.Join(reflect.TypeOf(empty{}).PkgPath(), "/../../hack/boilerplate.go.txt")
+	fmt.Fprintf(os.Stderr, "The package path: %s\n", reflect.TypeOf(empty{}).PkgPath())
+	// for unknown reasons, the package path has "k8s.x2eio" instead of "k8s.io", which
+	// would be the file system path. Hack it.
+	var tmp string = strings.ReplaceAll(reflect.TypeOf(empty{}).PkgPath(), "k8s.x2eio", "k8s.io")
+	fmt.Fprintf(os.Stderr, "The package path hacked: %s\n", tmp)
+	return path.Join(tmp, "/../../hack/boilerplate.go.txt")
 }
