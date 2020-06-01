@@ -197,7 +197,7 @@ type Extender struct {
 	TLSConfig *ExtenderTLSConfig
 	// HTTPTimeout specifies the timeout duration for a call to the extender. Filter timeout fails the scheduling of the pod. Prioritize
 	// timeout is ignored, k8s/other extenders priorities are used to select the node.
-	HTTPTimeout time.Duration
+	HTTPTimeout int64
 	// NodeCacheCapable specifies that the extender is capable of caching node information,
 	// so the scheduler should only send minimal information about the eligible nodes
 	// assuming that the extender already cached full details of all nodes in the cluster
